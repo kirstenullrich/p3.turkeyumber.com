@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+
+<head>
+	<style type='text/css'>
+        #list, #data {
+            border:1px solid black;
+            min-width:100px;
+            min-height:100px;
+            float:left;
+            position: relative;
+        }
+        #blender {
+        	background: url(images/blender.png) no-repeat;
+        	float:left;
+            position: relative;
+            width: 368px;
+            height: 674px;
+        }
+
+        #canvas{
+        	position: absolute;
+        	bottom:200px;
+        	left: 38px;
+        }
+
+        .display-none {
+        	display: none;
+        }
+
+        .kale {
+        	background: url(images/kale.png) no-repeat;
+        	height: 33px;
+        	width: 250px;
+        }
+        .oj {
+        	background: url(images/oj.png) no-repeat;
+        	height: 33px;
+        	width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+	<div id="list">
+		
+		<form>
+			<img src="images/kale.png" class="display-none"/><input type="checkbox" name="item" value="kale">Kale<br>
+			<img src="images/oj.png" class="display-none" /><input type="checkbox" name="item" value="oj">OJ<br>
+			<img src="images/banana.png" class="display-none" /><input type="checkbox" name="item" value="banana">Banana<br>
+			<img src="images/granola.png" class="display-none"/><input type="checkbox" name="item" value="granola">Granola<br>
+		</form> 
+	</div>
+
+	<div id='blender'>
+		<div id="canvas">
+			<img src="images/kale.png" class="display-none" value="kale"/>
+			<img src="images/oj.png" class="display-none"  value="oj"/>
+			<img src="images/banana.png" class="display-none" />
+			<img src="images/granola.png" class="display-none"/>
+		</div>
+	</div>
+
+	<div id='data'>
+	</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+ 
+		$(function() {
+		        $("input").click(function() {
+
+		            if ($(this).is(":checked")) {
+		            	var checked = $(this);
+		            	var value = checked.val();
+		                $('<div/>').addClass(value)
+		                    .appendTo($("#canvas"))
+		                    .hide()
+		                    .fadeIn(500);
+		                }
+		            else {
+		                $('#canvas', value).fadeOut(function(){
+		                    $(this).remove()
+		                })
+		            }
+		        });
+		    });
+
+//$('#list').change(intheblender);
+
+//function intheblender() {
+  //      var item = $('input[name=item]:checked');
+    //    item.each(function() {
+                                
+      //          var ingredient = $(this).val();
+        //         if (ingredient == $('#canvas img').val()) {
+          //       	$('#canvas','img').toggle();
+            //     }
+                                
+     //       }); // end of loop
+ //   };
+
+//var icon = function() {
+//	$(this, 'input:checked').prev().clone().appendTo( "#canvas" ).toggle();
+//	};
+
+
+	//$( "input[type=checkbox]" ).on( "click", ":checked", icon );
+	//$('#canvas').prepend(icon).removeClass('display-none');
+	//$( "input[type=checkbox]" ).click(icon); 
+
+	 
+
+
+    </script>
+</body>
+</html>
