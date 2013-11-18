@@ -25,6 +25,15 @@
         	left: 38px;
         }
 
+        #blendbutton {
+        	position: absolute;
+        	bottom: 100px;
+        	left: 113px;
+        	height: 50px;
+        	width: 100px;
+        	background: red;
+        }
+
         .display-none {
         	display: none;
         }
@@ -39,6 +48,16 @@
         	height: 33px;
         	width: 250px;
         }
+        .banana {
+        	background: url(images/banana.png) no-repeat;
+        	height: 33px;
+        	width: 250px;
+        }
+        .granola {
+        	background: url(images/granola.png) no-repeat;
+        	height: 33px;
+        	width: 250px;
+        }
     </style>
 </head>
 
@@ -46,19 +65,18 @@
 	<div id="list">
 		
 		<form>
-			<img src="images/kale.png" class="display-none"/><input type="checkbox" name="item" value="kale">Kale<br>
-			<img src="images/oj.png" class="display-none" /><input type="checkbox" name="item" value="oj">OJ<br>
-			<img src="images/banana.png" class="display-none" /><input type="checkbox" name="item" value="banana">Banana<br>
-			<img src="images/granola.png" class="display-none"/><input type="checkbox" name="item" value="granola">Granola<br>
+			<input type="checkbox" name="item" value="kale">Kale<br>
+			<input type="checkbox" name="item" value="oj">OJ<br>
+			<input type="checkbox" name="item" value="banana">Banana<br>
+			<input type="checkbox" name="item" value="granola">Granola<br>
 		</form> 
 	</div>
 
 	<div id='blender'>
 		<div id="canvas">
-			<img src="images/kale.png" class="display-none" value="kale"/>
-			<img src="images/oj.png" class="display-none"  value="oj"/>
-			<img src="images/banana.png" class="display-none" />
-			<img src="images/granola.png" class="display-none"/>
+
+		</div>
+		<div id="blendbutton">
 		</div>
 	</div>
 
@@ -68,51 +86,71 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
  
-		$(function() {
+			$(function() {
+		        
 		        $("input").click(function() {
+		        	
+		        	// Figure which ingredient was clicked on *outside* of the if statement...
+		        	// That way it's available in both the If and the Else...
+		        	var checked = $(this);
+		            var value   = checked.val();
+		            
+		            console.log(value);
 
 		            if ($(this).is(":checked")) {
-		            	var checked = $(this);
-		            	var value = checked.val();
+		            	
 		                $('<div/>').addClass(value)
 		                    .appendTo($("#canvas"))
 		                    .hide()
 		                    .fadeIn(500);
 		                }
 		            else {
-		                $('#canvas', value).fadeOut(function(){
-		                    $(this).remove()
+						
+		           		// Fade out the ingredient 
+				   		// Before: $(value) = kale = jquery doesn't know what just kale is
+				   		// After: $("." + value) = .kale = elements with the class kale
+		                $("." + value).fadeOut(function(){
+		                
+		                	// Then remove it from the dom
+		                    $(this).remove();
 		                })
 		            }
 		        });
 		    });
 
-//$('#list').change(intheblender);
 
-//function intheblender() {
-  //      var item = $('input[name=item]:checked');
-    //    item.each(function() {
-                                
-      //          var ingredient = $(this).val();
-        //         if (ingredient == $('#canvas img').val()) {
-          //       	$('#canvas','img').toggle();
-            //     }
-                                
-     //       }); // end of loop
- //   };
+			function nutrition(cal, fat, carb, pro, vit){
+			    return {
+			      cal:cal,
+			      fat:fat,
+			      carb:carb,
+			      pro:pro,
+			      vit:vit,
+			    }
+			}
 
-//var icon = function() {
-//	$(this, 'input:checked').prev().clone().appendTo( "#canvas" ).toggle();
-//	};
+			var ndata = {};
+			ndata["kale"] = nutrition(33, 0, 7, 2, 137);
+			var nd_kale = ndata["kale"];
+			console.log(nd_kale.cal,nd_kale.vit);
 
+		$(function() {
+		        
+		        $("#blendbutton").click(function() {
+		        	
+		        	// Figure which ingredient was clicked on *outside* of the if statement...
+		        	// That way it's available in both the If and the Else...
+		        	//var checked = $(this);
+		            //var value   = checked.val();
+		            
+		            //var listitem = ($(this).is(":checked")); 
 
-	//$( "input[type=checkbox]" ).on( "click", ":checked", icon );
-	//$('#canvas').prepend(icon).removeClass('display-none');
-	//$( "input[type=checkbox]" ).click(icon); 
-
-	 
-
-
+		            $( "input:checked" ).each(function( index ) {
+						console.log( index + ": " + $( this ).val() );
+					});
+		            
+		        });
+		    });
     </script>
 </body>
 </html>
