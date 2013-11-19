@@ -53,7 +53,7 @@
         	height: 33px;
         	width: 250px;
         }
-        .granola {
+        .yogurt {
         	background: url(images/granola.png) no-repeat;
         	height: 33px;
         	width: 250px;
@@ -68,7 +68,7 @@
 			<input type="checkbox" name="item" value="kale">Kale<br>
 			<input type="checkbox" name="item" value="oj">OJ<br>
 			<input type="checkbox" name="item" value="banana">Banana<br>
-			<input type="checkbox" name="item" value="granola">Granola<br>
+			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
 		</form> 
 	</div>
 
@@ -95,7 +95,7 @@
 		        	var checked = $(this);
 		            var value   = checked.val();
 		            
-		            console.log(value);
+		            //console.log(value);
 
 		            if ($(this).is(":checked")) {
 		            	
@@ -118,7 +118,7 @@
 		        });
 		    });
 
-
+			//To store item nutrition data
 			function nutrition(cal, fat, carb, pro, vit){
 			    return {
 			      cal:cal,
@@ -127,30 +127,48 @@
 			      pro:pro,
 			      vit:vit,
 			    }
-			}
+			};
 
+			//Storing the actual data per item
 			var ndata = {};
 			ndata["kale"] = nutrition(33, 0, 7, 2, 137);
-			var nd_kale = ndata["kale"];
-			console.log(nd_kale.cal,nd_kale.vit);
+			ndata["oj"] = nutrition(112, 0, 26, 2, 10);
+			ndata["banana"] = nutrition(133, 0, 34, 2, 2);
+			ndata["yogurt"] = nutrition(154, 4, 17, 13, 2);
+			//var nd_kale = ndata["kale"];
+			//console.log(nd_kale.cal,nd_kale.vit);
 
-		$(function() {
-		        
-		        $("#blendbutton").click(function() {
-		        	
-		        	// Figure which ingredient was clicked on *outside* of the if statement...
-		        	// That way it's available in both the If and the Else...
-		        	//var checked = $(this);
-		            //var value   = checked.val();
-		            
-		            //var listitem = ($(this).is(":checked")); 
+			//Ready to calculate, sir!
+			var totalcal = 0;
+			var totalfat = 0;
+			var totalcarb = 0;
+			var totalpro = 0;
+			var totalvit = 0;
 
-		            $( "input:checked" ).each(function( index ) {
-						console.log( index + ": " + $( this ).val() );
-					});
-		            
-		        });
-		    });
+
+			//Click blend 
+			$(function() {
+			        
+			        $("#blendbutton").click(function() {
+
+			        	//Loop through checked items, retrieve nutrition data, and add it all up as we go
+
+			            $( "input:checked" ).each(function( index ) {
+							//console.log( index + ": " + $( this ).val() );
+							var value = $( this ).val();
+							totalcal += Number(ndata[value].cal);
+							totalfat += Number(ndata[value].fat);
+							totalcarb += Number(ndata[value].carb);
+							totalpro += Number(ndata[value].pro);
+							totalvit += Number(ndata[value].vit);
+						});
+
+					//The nutrition data totals, ready to use
+					console.log(totalcal,totalfat,totalcarb,totalpro,totalvit); 
+
+			        });
+			    });
+
     </script>
 </body>
 </html>
