@@ -80,8 +80,16 @@
 		</div>
 	</div>
 
-	<div id='data'>
+	<div id='data' class="display-none">
+		<p id="calories">Calories: </p>
+		<p id="fat">Fat: </p>
+		<p id="carb">Carbohydrates: </p>
+		<p id="protein">Protein: </p>
+		<p id="vit_a">Vitamin A: </p>
 	</div>
+	<div id='desc'></div>
+<img class="animated" interval="50" max="4" pattern="./images/blend0#.png" />
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
@@ -147,28 +155,74 @@
 
 
 			//Click blend 
-			$(function() {
+			//$(function() {
 			        
-			        $("#blendbutton").click(function() {
 
-			        	//Loop through checked items, retrieve nutrition data, and add it all up as we go
-
-			            $( "input:checked" ).each(function( index ) {
+					function checked_loop() {
+						//Loop through checked items, retrieve nutrition data, and add it all up as we go
+						$( "input:checked" ).each(function() {
 							//console.log( index + ": " + $( this ).val() );
-							var value = $( this ).val();
+							var value = $(this).val();
 							totalcal += Number(ndata[value].cal);
 							totalfat += Number(ndata[value].fat);
 							totalcarb += Number(ndata[value].carb);
 							totalpro += Number(ndata[value].pro);
 							totalvit += Number(ndata[value].vit);
 						});
+					};
 
-					//The nutrition data totals, ready to use
-					console.log(totalcal,totalfat,totalcarb,totalpro,totalvit); 
 
-			        });
-			    });
+				$("#blendbutton").click(function() {
+					checked_loop();
 
+					//Output nutrition data totals
+					$(data).removeClass("display-none");
+					$("#calories").append(totalcal);
+					$("#fat").append(totalfat);
+					$("#carb").append(totalcarb);
+					$("#protein").append(totalpro);
+					$("#vit_a").append(totalvit);
+				});
+
+			
+
+
+			//Description source words stored in arrays.
+			var kale_adj1 = ["Earthy","Fresh","Surprising"];
+			var kale_adj2 = ["greener than you'd like","healthy-looking","planty"];
+			var kale_clause = ["with a vegetal aroma","with lots of fiber","would make your mom happy"];
+			var kale_end = ["Not as bad as it looks.","As bad as it looks."];
+
+			var kale_array = [kale_adj1,kale_adj2,kale_clause,kale_end];
+
+			var oj_adj1 = ["Bright","Citrusy","Acidic"];
+			var oj_adj2 = ["sweet","drinkable","orangey"];
+			var oj_clause = ["reminds you of breakfast","with lots of vitamin C","makes you happy"];
+			var oj_end = ["Pretty good.","You might consider making this again."];
+
+			var oj_array = [oj_adj1,oj_adj2,oj_clause,oj_end];
+
+			var blend_array = [kale_array,oj_array];
+
+			// How many ingredient are there?	
+			var ingredient_count = blend_array.length;
+	
+		
+		function choose_adj1 () {
+			// Pick a random ingredient array.
+			var random_ingredient_array = Math.floor((Math.random()*ingredient_count));
+			// Pick the [0] place in our random ingredient array (the one that holds the right choice of words)
+			var choose_ingredient_array = blend_array[random_ingredient_array][0];
+			// Figure out how many items are in that [0] array
+			var length_adj1 = choose_ingredient_array.length;
+			// Pick a random number that is not longer than the amount of elements in the chosen [0]
+			var random_adj1 = Math.floor((Math.random()*length_adj1));
+			// Finally, choose the random adjective 1 word
+			var adj1 = choose_ingredient_array[random_adj1];
+			return adj1;
+		};
+
+		console.log(choose_adj1());
     </script>
 </body>
 </html>

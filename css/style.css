@@ -1,0 +1,80 @@
+/* ==========================================================================
+   p3.turkeyumber.com styles
+   ========================================================================== 
+        Colors: 
+*/
+
+/* Main content divs */
+#list, #data {
+    border:1px solid black;
+    min-width:100px;
+    max-width: 300px;
+    min-height:100px;
+    float:left;
+    position: relative;
+    }
+
+#blender {
+    background: url(../images/blender.png) no-repeat;
+    float:left;
+    position: relative;
+    width: 368px;
+    height: 674px;
+    }
+
+#clear {
+    background: blue;
+    width:100px;
+    height:50px;
+    float:left;
+    position: relative;
+    }
+
+/* Blender internal divs */
+#canvas{
+    position: absolute;
+    bottom:200px;
+    left: 38px;
+    }
+
+#blendbutton {
+    position: absolute;
+    bottom: 100px;
+    left: 113px;
+    height: 50px;
+    width: 100px;
+    background: red;
+    }
+
+/* Blender ingredients */
+.display-none {
+    display: none;
+    }
+
+.kale {
+    background: url(../images/kale.png) no-repeat;
+    height: 33px;
+    width: 250px;
+    margin-top: -3px;
+    }
+
+.oj {
+    background: url(../images/oj.png) no-repeat;
+    height: 33px;
+    width: 250px;
+    margin-top: -3px;
+    }
+
+.banana {
+    background: url(../images/banana.png) no-repeat;
+    height: 33px;
+    width: 250px;
+    margin-top: -3px;
+    }
+
+.yogurt {
+    background: url(../images/granola.png) no-repeat;
+    height: 33px;
+    width: 250px;
+    margin-top: -3px;
+    }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+
+<head>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
+</head>
+
+<body>
+
+	<div id="list">
+		<h1>Ingredients</h1>
+		<form>
+			<input type="checkbox" name="item" value="kale">Kale<br>
+			<input type="checkbox" name="item" value="oj">OJ<br>
+			<input type="checkbox" name="item" value="banana">Banana<br>
+			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
+			<input type="checkbox" name="item" value="kale">Kale<br>
+			<input type="checkbox" name="item" value="oj">OJ<br>
+			<input type="checkbox" name="item" value="banana">Banana<br>
+			<input type="checkbox" name="item" value="yogurt">Yogurt<br>			
+			<input type="checkbox" name="item" value="kale">Kale<br>
+			<input type="checkbox" name="item" value="oj">OJ<br>
+			<input type="checkbox" name="item" value="banana">Banana<br>
+			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
+			<input type="checkbox" name="item" value="kale">Kale<br>
+			<input type="checkbox" name="item" value="oj">OJ<br>
+		</form> 
+	</div>
+
+	<div id='blender'>
+		<div id="canvas"></div>
+		<div id="blendbutton"></div>
+	</div>
+
+	<div id='data' class="display-none">
+		<p id="calories">Calories: </p>
+		<p id="fat">Fat: </p>
+		<p id="carb">Carbohydrates: </p>
+		<p id="protein">Protein: </p>
+		<p id="vit_a">Vitamin A: </p>
+		<p id="desc"> </p>
+	</div>
+
+	<div id="clear">
+	</div>
+	
+<img class="animated" interval="50" max="4" pattern="./images/blend0#.png" />
+
+
+<script src="js/blender.js"></script>
+<script src="js/animate.js"></script>
+</body>
+
+</html>
