@@ -1,58 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
 
 <head>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
-    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 </head>
 
 <body>
+	<div class="mainwrap">
+	<div class="contentwrap">
 
-	<div id="list">
-		<h1>Ingredients</h1>
-		<form>
-			<input type="checkbox" name="item" value="kale">Kale<br>
-			<input type="checkbox" name="item" value="oj">OJ<br>
-			<input type="checkbox" name="item" value="banana">Banana<br>
-			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
-			<input type="checkbox" name="item" value="kale">Kale<br>
-			<input type="checkbox" name="item" value="oj">OJ<br>
-			<input type="checkbox" name="item" value="banana">Banana<br>
-			<input type="checkbox" name="item" value="yogurt">Yogurt<br>			
-			<input type="checkbox" name="item" value="kale">Kale<br>
-			<input type="checkbox" name="item" value="oj">OJ<br>
-			<input type="checkbox" name="item" value="banana">Banana<br>
-			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
-			<input type="checkbox" name="item" value="kale">Kale<br>
-			<input type="checkbox" name="item" value="oj">OJ<br>
-		</form> 
+		<div id="clear">
+			<p>Clear</p>
+		</div>
+
+
+		<div id='blender'>
+			<div id="canvas"></div>
+			<div id="liquid">
+				<div id="animate">
+					<img class="animated" interval="50" max="20" pattern="./images/blend-#.png" />
+				</div>
+			</div>
+			<div id="blendbutton">
+				<p>Blend</p>
+			</div>
+		</div>
+
+		<header>
+			<img src="images/granola.png"/>
+		</header>
+		<div id="list">
+			<h1>Ingredients</h1>
+			<form>
+				<input type="checkbox" name="item" id="kale" value="kale" /><label for="kale">Kale (&frac12; cup leaves)</label><br>
+				<input type="checkbox" name="item" id="oj" value="oj" /><label for="oj">Orange juice (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="banana" value="banana" /><label for="banana">Banana (&frac12; cup, sliced)</label><br>
+				<input type="checkbox" name="item" id="yogurt" value="yogurt" /><label for="yogurt">Yogurt (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="berries" value="berries" /><label for="berries">Mixed berries (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="choc" value="choc" /><label for="choc">Hershey's chocolate syrup (&frac14; cup)</label><br>
+				<input type="checkbox" name="item" id="ruta" value="ruta" /><label for="ruta">Rutabaga (&frac12; cup, diced)</label><br>
+				<input type="checkbox" name="item" id="pizza" value="pizza" /><label for="pizza">Leftover pizza (1 slice, Domino's, cheese)</label><br>	
+				<input type="checkbox" name="item" id="mango" value="mango" /><label for="mango">Mango (&frac12; cup, diced)</label><br>
+				<input type="checkbox" name="item" id="catfd" value="catfd" /><label for="catfd">Cat food (&frac12; cup kibble)</label><br>
+				<input type="checkbox" name="item" id="sponge" value="sponge" /><label for="sponge">Kitchen sponge (2 days of use)</label><br>
+				<input type="checkbox" name="item" id="dirt" value="dirt" /><label for="dirt">Dirt (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="pb" value="pb" /><label for="pb">Peanut butter (&frac14; cup)</label><br>
+				<input type="checkbox" name="item" id="tj" value="tj" /><label for="tj">Tomato juice (&frac12; cup)</label><br>
+			</form> 
+		</div>
+
+		<div id='data' class="display-none">
+			<h1>Nutrition Data</h1>
+				<p id="names">Ingredients: </p>
+				<p id="calories">Calories: </p>
+				<p id="fat">Fat: </p>
+				<p id="carb">Carbohydrates: </p>
+				<p id="protein">Protein: </p>
+				<p id="vit_a">Vitamin A: </p>
+
+			<h2>Taster Notes</h2>
+				<p id="desc"> </p>
+		</div>
+
 	</div>
-
-	<div id='blender'>
-		<div id="canvas"></div>
-		<div id="blendbutton"></div>
 	</div>
-
-	<div id='data' class="display-none">
-		<p id="calories">Calories: </p>
-		<p id="fat">Fat: </p>
-		<p id="carb">Carbohydrates: </p>
-		<p id="protein">Protein: </p>
-		<p id="vit_a">Vitamin A: </p>
-		<p id="desc"> </p>
-	</div>
-
-	<div id="clear">
-	</div>
-	
-<img class="animated" interval="50" max="4" pattern="./images/blend0#.png" />
-
 
 <script src="js/blender.js"></script>
+<script src="js/preload.js"></script>
 <script src="js/animate.js"></script>
 </body>
 

@@ -1,228 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
 
 <head>
-	<style type='text/css'>
-        #list, #data {
-            border:1px solid black;
-            min-width:100px;
-            min-height:100px;
-            float:left;
-            position: relative;
-        }
-        #blender {
-        	background: url(images/blender.png) no-repeat;
-        	float:left;
-            position: relative;
-            width: 368px;
-            height: 674px;
-        }
-
-        #canvas{
-        	position: absolute;
-        	bottom:200px;
-        	left: 38px;
-        }
-
-        #blendbutton {
-        	position: absolute;
-        	bottom: 100px;
-        	left: 113px;
-        	height: 50px;
-        	width: 100px;
-        	background: red;
-        }
-
-        .display-none {
-        	display: none;
-        }
-
-        .kale {
-        	background: url(images/kale.png) no-repeat;
-        	height: 33px;
-        	width: 250px;
-        }
-        .oj {
-        	background: url(images/oj.png) no-repeat;
-        	height: 33px;
-        	width: 250px;
-        }
-        .banana {
-        	background: url(images/banana.png) no-repeat;
-        	height: 33px;
-        	width: 250px;
-        }
-        .yogurt {
-        	background: url(images/granola.png) no-repeat;
-        	height: 33px;
-        	width: 250px;
-        }
-    </style>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 </head>
 
 <body>
-	<div id="list">
-		
-		<form>
-			<input type="checkbox" name="item" value="kale">Kale<br>
-			<input type="checkbox" name="item" value="oj">OJ<br>
-			<input type="checkbox" name="item" value="banana">Banana<br>
-			<input type="checkbox" name="item" value="yogurt">Yogurt<br>
-		</form> 
-	</div>
+	<div class="mainwrap">
+	<div class="contentwrap">
 
-	<div id='blender'>
-		<div id="canvas">
-
+		<div id="clear">
+			<p>Clear</p>
 		</div>
-		<div id="blendbutton">
+
+
+		<div id='blender'>
+			<div id="canvas"></div>
+			<div id="liquid">
+				<div id="animate">
+					<img class="animated" interval="50" max="20" pattern="./images/blend-#.png" />
+				</div>
+			</div>
+			<div id="blendbutton">
+				<p>Blend</p>
+			</div>
 		</div>
-	</div>
 
-	<div id='data' class="display-none">
-		<p id="calories">Calories: </p>
-		<p id="fat">Fat: </p>
-		<p id="carb">Carbohydrates: </p>
-		<p id="protein">Protein: </p>
-		<p id="vit_a">Vitamin A: </p>
-	</div>
-	<div id='desc'></div>
-<img class="animated" interval="50" max="4" pattern="./images/blend0#.png" />
-
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
- 
-			$(function() {
-		        
-		        $("input").click(function() {
-		        	
-		        	// Figure which ingredient was clicked on *outside* of the if statement...
-		        	// That way it's available in both the If and the Else...
-		        	var checked = $(this);
-		            var value   = checked.val();
-		            
-		            //console.log(value);
-
-		            if ($(this).is(":checked")) {
-		            	
-		                $('<div/>').addClass(value)
-		                    .appendTo($("#canvas"))
-		                    .hide()
-		                    .fadeIn(500);
-		                }
-		            else {
-						
-		           		// Fade out the ingredient 
-				   		// Before: $(value) = kale = jquery doesn't know what just kale is
-				   		// After: $("." + value) = .kale = elements with the class kale
-		                $("." + value).fadeOut(function(){
-		                
-		                	// Then remove it from the dom
-		                    $(this).remove();
-		                })
-		            }
-		        });
-		    });
-
-			//To store item nutrition data
-			function nutrition(cal, fat, carb, pro, vit){
-			    return {
-			      cal:cal,
-			      fat:fat,
-			      carb:carb,
-			      pro:pro,
-			      vit:vit,
-			    }
-			};
-
-			//Storing the actual data per item
-			var ndata = {};
-			ndata["kale"] = nutrition(33, 0, 7, 2, 137);
-			ndata["oj"] = nutrition(112, 0, 26, 2, 10);
-			ndata["banana"] = nutrition(133, 0, 34, 2, 2);
-			ndata["yogurt"] = nutrition(154, 4, 17, 13, 2);
-			//var nd_kale = ndata["kale"];
-			//console.log(nd_kale.cal,nd_kale.vit);
-
-			//Ready to calculate, sir!
-			var totalcal = 0;
-			var totalfat = 0;
-			var totalcarb = 0;
-			var totalpro = 0;
-			var totalvit = 0;
-
-
-			//Click blend 
-			//$(function() {
-			        
-
-					function checked_loop() {
-						//Loop through checked items, retrieve nutrition data, and add it all up as we go
-						$( "input:checked" ).each(function() {
-							//console.log( index + ": " + $( this ).val() );
-							var value = $(this).val();
-							totalcal += Number(ndata[value].cal);
-							totalfat += Number(ndata[value].fat);
-							totalcarb += Number(ndata[value].carb);
-							totalpro += Number(ndata[value].pro);
-							totalvit += Number(ndata[value].vit);
-						});
-					};
-
-
-				$("#blendbutton").click(function() {
-					checked_loop();
-
-					//Output nutrition data totals
-					$(data).removeClass("display-none");
-					$("#calories").append(totalcal);
-					$("#fat").append(totalfat);
-					$("#carb").append(totalcarb);
-					$("#protein").append(totalpro);
-					$("#vit_a").append(totalvit);
-				});
-
+		<header>
 			
+		</header>
+		<div id="list">
+			<h1>Ingredients</h1>
+			<form>
+				<input type="checkbox" name="item" id="kale" value="kale" /><label for="kale">Kale (&frac12; cup leaves)</label><br>
+				<input type="checkbox" name="item" id="oj" value="oj" /><label for="oj">Orange juice (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="banana" value="banana" /><label for="banana">Banana (&frac12; cup, sliced)</label><br>
+				<input type="checkbox" name="item" id="yogurt" value="yogurt" /><label for="yogurt">Yogurt (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="berries" value="berries" /><label for="berries">Mixed berries (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="choc" value="choc" /><label for="choc">Hershey's chocolate syrup (&frac14; cup)</label><br>
+				<input type="checkbox" name="item" id="ruta" value="ruta" /><label for="ruta">Rutabaga (&frac12; cup, diced)</label><br>
+				<input type="checkbox" name="item" id="pizza" value="pizza" /><label for="pizza">Leftover pizza (1 slice, Domino's, cheese)</label><br>	
+				<input type="checkbox" name="item" id="mango" value="mango" /><label for="mango">Mango (&frac12; cup, diced)</label><br>
+				<input type="checkbox" name="item" id="catfd" value="catfd" /><label for="catfd">Cat food (&frac12; cup kibble)</label><br>
+				<input type="checkbox" name="item" id="sponge" value="sponge" /><label for="sponge">Kitchen sponge (2 days of use)</label><br>
+				<input type="checkbox" name="item" id="dirt" value="dirt" /><label for="dirt">Dirt (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="pb" value="pb" /><label for="pb">Peanut butter (&frac14; cup)</label><br>
+				<input type="checkbox" name="item" id="tj" value="tj" /><label for="tj">Tomato juice (&frac12; cup)</label><br>
+			</form> 
+		</div>
 
+		<div id='data' class="display-none">
+			<h1>Nutrition Data</h1>
+				<p id="names">Ingredients: </p>
+				<p id="calories">Calories: </p>
+				<p id="fat">Fat: </p>
+				<p id="carb">Carbohydrates: </p>
+				<p id="protein">Protein: </p>
+				<p id="vit_a">Vitamin A: </p>
 
-			//Description source words stored in arrays.
-			var kale_adj1 = ["Earthy","Fresh","Surprising"];
-			var kale_adj2 = ["greener than you'd like","healthy-looking","planty"];
-			var kale_clause = ["with a vegetal aroma","with lots of fiber","would make your mom happy"];
-			var kale_end = ["Not as bad as it looks.","As bad as it looks."];
+			<h2>Taster Notes</h2>
+				<p id="desc"> </p>
+		</div>
 
-			var kale_array = [kale_adj1,kale_adj2,kale_clause,kale_end];
+	</div>
+	</div>
 
-			var oj_adj1 = ["Bright","Citrusy","Acidic"];
-			var oj_adj2 = ["sweet","drinkable","orangey"];
-			var oj_clause = ["reminds you of breakfast","with lots of vitamin C","makes you happy"];
-			var oj_end = ["Pretty good.","You might consider making this again."];
-
-			var oj_array = [oj_adj1,oj_adj2,oj_clause,oj_end];
-
-			var blend_array = [kale_array,oj_array];
-
-			// How many ingredient are there?	
-			var ingredient_count = blend_array.length;
-	
-		
-		function choose_adj1 () {
-			// Pick a random ingredient array.
-			var random_ingredient_array = Math.floor((Math.random()*ingredient_count));
-			// Pick the [0] place in our random ingredient array (the one that holds the right choice of words)
-			var choose_ingredient_array = blend_array[random_ingredient_array][0];
-			// Figure out how many items are in that [0] array
-			var length_adj1 = choose_ingredient_array.length;
-			// Pick a random number that is not longer than the amount of elements in the chosen [0]
-			var random_adj1 = Math.floor((Math.random()*length_adj1));
-			// Finally, choose the random adjective 1 word
-			var adj1 = choose_ingredient_array[random_adj1];
-			return adj1;
-		};
-
-		console.log(choose_adj1());
-    </script>
+<script src="js/blender.js"></script>
+<script src="js/preload.js"></script>
+<script src="js/animate.js"></script>
 </body>
+
 </html>
