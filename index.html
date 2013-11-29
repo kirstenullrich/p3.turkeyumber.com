@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -15,25 +15,24 @@
 	<div class="mainwrap">
 	<div class="contentwrap">
 
-		<div id="clear">
-			<p>Clear</p>
-		</div>
+		
 
 
 		<div id='blender'>
+			<div id="overlay"></div>
 			<div id="canvas"></div>
 			<div id="liquid">
 				<div id="animate">
 					<img class="animated" interval="50" max="20" pattern="./images/blend-#.png" />
 				</div>
 			</div>
-			<div id="blendbutton">
-				<p>Blend</p>
-			</div>
+			<div id="maskblendbutton" class="display-none"></div>
+			<div id="blendbutton"></div>
+			<div id="clear"></div>
 		</div>
 
 		<header>
-			
+
 		</header>
 		<div id="list">
 			<h1>Ingredients</h1>
@@ -42,7 +41,7 @@
 				<input type="checkbox" name="item" id="oj" value="oj" /><label for="oj">Orange juice (&frac12; cup)</label><br>
 				<input type="checkbox" name="item" id="banana" value="banana" /><label for="banana">Banana (&frac12; cup, sliced)</label><br>
 				<input type="checkbox" name="item" id="yogurt" value="yogurt" /><label for="yogurt">Yogurt (&frac12; cup)</label><br>
-				<input type="checkbox" name="item" id="berries" value="berries" /><label for="berries">Mixed berries (&frac12; cup)</label><br>
+				<input type="checkbox" name="item" id="berry" value="berry" /><label for="berry">Blueberries (&frac12; cup)</label><br>
 				<input type="checkbox" name="item" id="choc" value="choc" /><label for="choc">Hershey's chocolate syrup (&frac14; cup)</label><br>
 				<input type="checkbox" name="item" id="ruta" value="ruta" /><label for="ruta">Rutabaga (&frac12; cup, diced)</label><br>
 				<input type="checkbox" name="item" id="pizza" value="pizza" /><label for="pizza">Leftover pizza (1 slice, Domino's, cheese)</label><br>	
@@ -57,12 +56,18 @@
 
 		<div id='data' class="display-none">
 			<h1>Nutrition Data</h1>
-				<p id="names">Ingredients: </p>
-				<p id="calories">Calories: </p>
-				<p id="fat">Fat: </p>
-				<p id="carb">Carbohydrates: </p>
-				<p id="protein">Protein: </p>
-				<p id="vit_a">Vitamin A: </p>
+				<p>Serving size 1 smoothie</p>
+				<p class="top_border_fat">Calories&nbsp;<span id="calories"></span></p>
+				<p class="top_border_med">Fat&nbsp;<span id="fat"></span></p>
+				<p class="top_border">Sodium&nbsp;<span id="sod"></span></p>
+				<p class="top_border">Carbohydrates&nbsp;<span id="carb"></span></p>
+				<p class="top_border indent">Fiber&nbsp;<span id="fiber"></span></p>
+				<p class="top_border indent">Sugars&nbsp;<span id="sugar"></span></p>
+				<p class="top_border">Protein&nbsp;<span id="protein"></span></p>
+				<p class="top_border_fat">Vitamin A&nbsp;<span id="vita"></span></p>
+				<p>Vitamin C&nbsp;<span id="vitc"></span></p>
+				<p>Calcium&nbsp;<span id="calc"></span></p>
+				<p class="small_caps top_border_med"><span id="names"></span></p>
 
 			<h2>Taster Notes</h2>
 				<p id="desc"> </p>
