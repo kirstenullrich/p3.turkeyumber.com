@@ -6,13 +6,13 @@ function animateImage(Index) {
             var intervalID = parseInt($(this).attr("intervalid"));
             clearInterval(intervalID);
         } else {
-            var max = parseInt($(this).attr("max"));
-            var pattern = $(this).attr("pattern");
+            var max = 20;
+            var pattern = "./images/blend-#.png";
             var index = parseInt($(this).attr("index"));
             index++;
             if (index > max) {
                 //changed this so it doesn't loop
-                $(this).hide();
+                $(this).css('display','none');
                 $('#liquid').show();
             }
             var src = pattern.replace("#", index);
@@ -23,13 +23,13 @@ function animateImage(Index) {
 }
 function initialiseAnimatedImages() {
     $("img.animated").each(function (Index) {
-        var interval = $(this).attr("interval");
+        var interval = 50;
         $(this).attr("index", "0");
         var intervalID = setInterval(function () { animateImage(Index); }, interval);
         $(this).attr("intervalid", intervalID);
         //added this so the img is visible on blend button click and animation can happen again after clear button is used
         $('#liquid').show();
-        $(this).show();
+        $(this).css('display','inherit');
     });
 }
 //$(document).ready(function () {

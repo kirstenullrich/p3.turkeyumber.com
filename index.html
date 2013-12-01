@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
-
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<title>Blender Experiments</title>
 </head>
 
 <body>
@@ -21,9 +21,10 @@
 		<div id='blender'>
 			<div id="overlay"></div>
 			<div id="canvas"></div>
-			<div id="liquid">
+			<div id="liquid" class="display-none">
 				<div id="animate">
-					<img class="animated" interval="50" max="20" pattern="./images/blend-#.png" />
+					<!--interval, max and pattern attirbutes needed for the animate.js script. That's why I can't remove for validation. Sorry! -->
+					<img class="animated" src="images/blank.png" alt="This is what is in the blender"/>
 				</div>
 			</div>
 			<div id="maskblendbutton" class="display-none"></div>
