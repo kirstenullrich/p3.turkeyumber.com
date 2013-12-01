@@ -13,7 +13,7 @@ function animateImage(Index) {
             if (index > max) {
                 //changed this so it doesn't loop
                 $(this).css('display','none');
-                $('#liquid').show();
+                $('#liquid').css('display','inherit');
             }
             var src = pattern.replace("#", index);
             $(this).attr("index", index);
@@ -28,7 +28,7 @@ function initialiseAnimatedImages() {
         var intervalID = setInterval(function () { animateImage(Index); }, interval);
         $(this).attr("intervalid", intervalID);
         //added this so the img is visible on blend button click and animation can happen again after clear button is used
-        $('#liquid').show();
+        $('#liquid').css('display','inherit');
         $(this).css('display','inherit');
     });
 }
