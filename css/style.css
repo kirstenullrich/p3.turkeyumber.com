@@ -52,11 +52,10 @@ p {
 }
 
 
-/* PAGE HEAD */
+/* Page Head */
 header {
     height: 110px;
     width: 322px;
-    background: url(../images/blender_logo.png) no-repeat;
     float: right;
     position: relative;
 }

@@ -1,4 +1,4 @@
-//Animate functions from http://johncmolyneux.blogspot.com/2011/12/create-animated-png-from-sequence-of.html
+//Animate function adapted from http://johncmolyneux.blogspot.com/2011/12/create-animated-png-from-sequence-of.html
 //Thanks!
 function animateImage(Index) {
     $("img.animated:eq(" + Index + ")").each(function (Index) {
@@ -11,7 +11,7 @@ function animateImage(Index) {
             var index = parseInt($(this).attr("index"));
             index++;
             if (index > max) {
-                //changed this so it doesn't loop
+                //changed this so it doesn't loop, made it css so it's cross-browser
                 $(this).css('display','none');
                 $('#liquid').css('display','inherit');
             }
